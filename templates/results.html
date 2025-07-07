@@ -1,0 +1,26 @@
+<!-- templates/results.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Results</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 p-6">
+  <div class="max-w-5xl mx-auto bg-white rounded-xl p-6 shadow-md">
+    <h1 class="text-2xl font-bold mb-4">Evaluation Results</h1>
+    {% for item in responses %}
+      <div class="mb-6 border-b pb-4">
+        <p class="font-semibold text-blue-600">Q{{ loop.index }}: {{ item.question }}</p>
+        <p class="mt-2"><span class="font-semibold">Your Answer ({{ item.language }}):</span></p>
+        <pre class="bg-gray-100 p-3 rounded mb-2">{{ item.answer }}</pre>
+        <p><span class="font-semibold text-green-600">Feedback:</span></p>
+        <div class="bg-green-50 p-3 rounded prose max-w-none overflow-x-auto">
+            {{ item.feedback | safe }}
+        </div>
+
+      </div>
+    {% endfor %}
+    <a href="{{ url_for('reset') }}" class="mt-4 inline-block bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded">Restart</a>
+  </div>
+</body>
+</html>
